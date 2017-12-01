@@ -1,0 +1,48 @@
+package Sample;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import Models.EmployeeDetailsUtil;
+
+@WebServlet("/EmployeeInformation")
+public class EmployeeInformation extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	EmployeeDetailsUtil edu= new EmployeeDetailsUtil();
+    public EmployeeInformation() {
+        super();
+    }
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
+			String dropDown= request.getParameter("empDetail");
+			System.out.println(dropDown);
+			if(dropDown.equals("all"))
+			{
+				edu.getAll();
+			}
+			else if(dropDown.equals("byName"))
+			{
+				edu.getDetailsByName(request.getParameter("Name"));
+				(name);
+			}
+			else if(dropDown.equals("byId"))
+			{
+				edu.getDetailsById(request.getParameter("Id"));
+				
+			}
+		}
+		catch(Exception e)
+		{
+		e.printStackTrace();
+		}
+	}
+}

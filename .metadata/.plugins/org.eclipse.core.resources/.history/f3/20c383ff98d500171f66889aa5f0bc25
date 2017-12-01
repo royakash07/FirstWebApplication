@@ -1,0 +1,14 @@
+package Helper;
+
+public class Employee {
+private long EmployeeId;
+private String 
+public long getEmployeeId() {
+	return employeeId;
+}
+
+public void setEmployeeId(long employeeId) {
+	EmployeeId = EmployeeId;
+}
+
+}

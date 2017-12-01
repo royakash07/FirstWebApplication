@@ -1,0 +1,94 @@
+package Models;
+import java.sql.*;
+import java.util.HashMap;
+
+import Helper.*;
+
+public class EmployeeDetailsUtil {
+ResultSet rs=null;
+ConnectionHelper ch =new ConnectionHelper();
+Employee emp= new Employee();
+PreparedStatement ps = null;
+Connection conn= ch.createConnection();
+public HashMap<String, String> getAll()
+{	
+	HashMap<String,String> empInfo= new HashMap<String,String>();
+	String query="Select * from 'employeedetails'.'employee';";
+	try {
+		PreparedStatement ps= conn.prepareStatement(query);
+		rs=ps.executeQuery();
+		while (rs.next()) {
+			empInfo.put(rs.getString(1),rs.getString(2));
+		}
+	}
+	catch (SQLException e) {
+		e.printStackTrace();
+	}
+	finally
+	{
+		ch.closeResources(conn, ps, rs);
+	}
+	return empInfo;
+}
+public HashMap<String, String> getDetailsById(String Id)
+{
+	HashMap<String,String> empInfo= new HashMap<String,String>();
+	String query="Select * from employee where idEmployee=?;";
+	try {
+		ps= conn.prepareStatement(query);
+		rs=ps.executeQuery();
+		ps.setString(1, Id);
+		
+		while (rs.next()) {
+			empInfo.put(rs.getString(1),rs.getString(2));
+		}
+	}
+	catch (SQLException e) {
+		e.printStackTrace();
+	}
+	finally
+	{
+		ch.closeResources(conn, ps, rs);
+	}
+	return empInfo;
+}
+public HashMap<String, String> getDetailsByName(String name)
+{	
+	HashMap<String,String> empInfo= new HashMap<String,String>();
+	String query="Select * from employee where employeeName=?;";
+	try {
+		ps= conn.prepareStatement(query);
+		rs=ps.executeQuery();
+		ps.setString(1, name);
+		
+		while (rs.next()) {
+			empInfo.put(rs.getString(1),rs.getString(2));
+		}
+	}
+	catch (SQLException e) {
+		e.printStackTrace();
+	}
+	finally
+	{
+		ch.closeResources(conn, ps, rs);
+	}
+	return empInfo;
+}
+public void setDetails(String name,long id,Connection conn)
+{
+	String query="INSERT INTO `employeedetails`.`employee` (`idEmployee`, `employeeName`) VALUES (?,?);";
+	try {
+		ps=conn.prepareStatement(query);
+		ps.setLong(1, id);
+		ps.setString(2, name);
+		ps.executeUpdate();
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	finally
+	{
+		ch.closeResources(conn, ps, rs);
+	}
+}
+}

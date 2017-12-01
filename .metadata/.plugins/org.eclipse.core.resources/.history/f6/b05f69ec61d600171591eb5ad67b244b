@@ -1,0 +1,94 @@
+package Models;
+import java.sql.*;
+import java.util.HashMap;
+import java.util.LinkedList;
+
+import Helper.*;
+
+public class EmployeeDetailsUtil {
+//Helpers
+ConnectionHelper ch =new ConnectionHelper();
+PreparedStatement ps = null;
+ResultSet rs=null;
+Connection conn= ch.createConnection();
+public LinkedList<Employee> getAll()
+{	
+	LinkedList<Employee> empInfo=new LinkedList<Employee>();
+	String query="Select * from 'employeedetails'.'employee';";
+	try {
+		PreparedStatement ps= conn.prepareStatement(query);
+		rs=ps.executeQuery();
+		while (rs.next()) {
+			empInfo.add(new Employee(Long.parseLong(rs.getString(1)),rs.getString(2)));
+		}
+	}
+	catch (SQLException e) {
+		e.printStackTrace();
+	}
+	finally
+	{
+		ch.closeResources(conn, ps, rs);
+	}
+	return empInfo;
+}
+public LinkedList<Employee> getDetailsById(String Id)
+{
+	LinkedList<Employee> empInfo=new LinkedList<Employee>();
+	String query="Select * from employee where idEmployee=?;";
+	try {
+		ps= conn.prepareStatement(query);
+		rs=ps.executeQuery();
+		ps.setString(1, Id);
+		while (rs.next()) {
+			empInfo.add(new Employee(Long.parseLong(rs.getString(1)),rs.getString(2)));
+		}
+	}
+	catch (SQLException e) {
+		e.printStackTrace();
+	}
+	finally
+	{
+		ch.closeResources(conn, ps, rs);
+	}
+	return empInfo;
+}
+public LinkedList<Employee> getDetailsByName(String name)
+{	
+	LinkedList<Employee> empInfo=new LinkedList<Employee>();
+	String query="Select * from employee where employeeName=?;";
+	try {
+		ps= conn.prepareStatement(query);
+		rs=ps.executeQuery();
+		ps.setString(1, name);
+		
+		while (rs.next()) {
+			empInfo.add(new Employee(Long.parseLong(rs.getString(1)),rs.getString(2)));
+		}
+	}
+	catch (SQLException e) {
+		e.printStackTrace();
+	}
+	finally
+	{
+		ch.closeResources(conn, ps, rs);
+	}
+	return empInfo;
+}
+public void setDetails(String name,long id)
+{
+	String query="INSERT INTO `employeedetails`.`employee` (`idEmployee`, `employeeName`) VALUES (?,?);";
+	try {
+		ps=conn.prepareStatement(query);
+		ps.setLong(1, id);
+		ps.setString(2, name);
+		ps.executeUpdate();
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	finally
+	{
+		ch.closeResources(conn, ps, rs);
+	}
+}
+}

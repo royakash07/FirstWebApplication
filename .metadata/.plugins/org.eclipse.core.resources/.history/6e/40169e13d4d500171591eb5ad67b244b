@@ -1,0 +1,49 @@
+package Sample;
+
+import java.io.IOException;
+import java.sql.Connection;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.sql.*;
+import Helper.*;
+import Models.EmployeeDetailsUtil;
+@WebServlet("/Submit")
+public class Submit extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+    ConnectionHelper ch =new ConnectionHelper();
+    EmployeeDetailsUtil edu= new EmployeeDetailsUtil();
+    ResultSet rs=null;
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public Submit() {
+        super();
+    }
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
+		String query="INSERT INTO `employeedetails`.`employee` (`idEmployee`, `employeeName`) VALUES (?,?);";
+		String name=request.getParameter("Name");
+		long id= Long.parseLong(request.getParameter("EmployeeId"));
+		Connection conn=ch.createConnection();
+		PreparedStatement ps=conn.prepareStatement(query);
+		edu.setDetails(name, id, conn,ps);
+		RequestDispatcher dis=request.getRequestDispatcher("EmployeePortal.jsp");          
+        dis.forward(request, response);
+        ch.closeConnection(conn,ps,rs);
+		}
+		catch(Exception e)
+		{
+		e.printStackTrace();
+		}
+		}
+
+}

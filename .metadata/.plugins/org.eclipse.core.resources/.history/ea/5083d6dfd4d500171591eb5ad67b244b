@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<context>
+<Resource 
+			auth="Container"
+			driverClassName="com.mysql.jdbc.Driver"
+			maxActive="100"
+			maxWait="10000"
+			minIdle="10"
+			name="jdbc/EmployeeDB"
+			username="root"
+			password="pass00"
+			type="javax.sql.DataSource"
+			url="jdbc:mysql://127.0.0.1:3306/employeedetails"
+			global="jdbc/mydb"/>
+</context>

@@ -1,0 +1,29 @@
+package Helper;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.*;
+
+public class ConnectionHelper {
+	Connection conn;
+public static Connection createConnection(String URL,String userName,String password) {
+	try {
+		Class.forName("com.mysql.jdbc.Driver");
+		conn=DriverManager.getConnection(URL, userName, password);
+	} catch (SQLException | ClassNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return conn;
+}
+public void closeConnection(Connection conn,PreparedStatement ps)
+{
+	try {
+		conn.close();
+		ps.close();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+}
+}

@@ -1,0 +1,38 @@
+package Helper;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.LinkedList;
+import java.util.ListIterator;
+
+
+
+
+public class PlayGround {
+	public static void main(String args[])
+	{
+		String query="Select * from employee where idEmployee=?;";
+		try {
+			Class.forName("com.mysql.jdbc.Driver");  
+			Connection conn=DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/employeedetails","root","pass00");
+			ResultSet rs;
+			PreparedStatement ps= conn.prepareStatement(query);
+			System.out.println("------------------------------------------------");
+			ps.setString(1, "1464");
+			rs=ps.executeQuery();
+			
+			while (rs.next()) {
+				LinkedList<Employee> empInfo=new LinkedList<Employee>();
+				empInfo.add(new Employee(Long.parseLong(rs.getString(1)),rs.getString(2)));
+				ListIterator<LinkedList<Employee>> li =empInfo.listIterator<LinkedList<Employee>>();
+				while(li.hasNext())
+				System.out.println("Name :"+empInfo);
+		    }
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+}

@@ -1,0 +1,10 @@
+1511968706962	Delete element
+1512023453735	Delete element
+1512023777329	Encapsulate field 'EmployeeId'
+1512023914788	Encapsulate field 'EmployeeName'
+1512027163910	Delete element
+1512027791270	Rename compilation unit 'EmployeeDetails.java'
+1512027801664	Rename resource 'EmployeeProtal.jsp'
+1512035447085	Move 'Details.jsp' to 'WebContent'
+1512044686388	Delete element
+1512046862212	Move 'context.xml' to 'META-INF'

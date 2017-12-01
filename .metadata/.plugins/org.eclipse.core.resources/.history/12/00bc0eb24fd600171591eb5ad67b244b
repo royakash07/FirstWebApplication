@@ -1,0 +1,62 @@
+package Models;
+import java.sql.*;
+import java.util.HashMap;
+
+import Helper.*;
+
+public class EmployeeDetailsUtil {
+ResultSet rs=null;
+Employee emp= new Employee();
+public HashMap<Integer, String> getAll(Connection conn)
+{	
+	String query="Select * from 'employeedetails'.'employee';";
+	try {
+		PreparedStatement ps= conn.prepareStatement(query);
+		rs=ps.executeQuery();
+	}
+	catch (SQLException e) {
+		e.printStackTrace();
+	}
+	return null;
+}
+public HashMap<Integer, String> getDetailsById(String Id,Connection conn,PreparedStatement ps)
+{
+	long id= Long.parseLong(Id);
+	String query="Select * from 'employeedetails'.'employee' where 'idEmployee'=?;";
+	try {
+		ps= conn.prepareStatement(query);
+		rs=ps.executeQuery();
+		ps.setLong(1, id);
+	}
+	catch (SQLException e) {
+		e.printStackTrace();
+	}
+	return null;
+}
+public HashMap<Integer, String> getDetailsByName(String name,Connection conn,PreparedStatement ps)
+{
+	String query="Select * from 'employeedetails'.'employee' where 'employeeName'=?;";
+	try {
+		ps= conn.prepareStatement(query);
+		rs=ps.executeQuery();
+		ps.setString(1, name);
+	}
+	catch (SQLException e) {
+		e.printStackTrace();
+	}
+	return null;
+}
+public void setDetails(String name,long id,Connection conn,PreparedStatement ps)
+{
+	String query="INSERT INTO `employeedetails`.`employee` (`idEmployee`, `employeeName`) VALUES (?,?);";
+	try {
+		ps=conn.prepareStatement(query);
+		ps.setLong(1, id);
+		ps.setString(2, name);
+		ps.executeUpdate();
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+}
+}
