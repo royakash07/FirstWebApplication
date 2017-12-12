@@ -123,18 +123,7 @@
              Documentation at: /docs/config/valve.html
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
-<Resource 
-			auth="Container"
-			driverClassName="com.mysql.jdbc.Driver"
-			maxActive="100"
-			maxWait="10000"
-			minIdle="10"
-			name="jdbc/EmployeeDB"
-			username="root"
-			password="pass00"
-			type="javax.sql.DataSource"
-			url="jdbc:mysql://127.0.0.1:3306/employeedetails"
-			global="jdbc/EmployeeDB"/>
+
       <Context docBase="SampleWebApplication" path="/SampleWebApplication" reloadable="true" source="org.eclipse.jst.jee.server:SampleWebApplication"/></Host>
     </Engine>
   </Service>

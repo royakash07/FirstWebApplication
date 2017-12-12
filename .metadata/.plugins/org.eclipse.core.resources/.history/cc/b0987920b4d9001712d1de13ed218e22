@@ -1,0 +1,63 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@ page import ="Helper.Employee"%>
+    <%@ page import ="java.util.*" %>
+    <%@ page import ="java.util.ArrayList" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Details</title>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<style>
+.myDiv{
+  display:none;
+}
+#show[type=button]:submitted + div {
+	display:block;
+}
+</style>
+</head>
+<body>
+<div style="padding: 30px">
+<div class="container well well-lg">
+<h2><strong>EMPLOYEE DETAILS</strong></h2>
+<form action="EmployeeDetails" method="post">
+<select name="empDetail" id="empDetail" >
+<option class="drop"selected="selected">Please select ...</option>
+<option value="all">Get All Details</option>
+<option value="byName">Details by Name</option>
+<option value="byId">Details by Id</option>
+</select>
+<input type="text" name="SearchBox" placeholder="Search">
+<input type="submit" class="btn btn-success" value="Details" id="show">
+<div class="myDiv" >
+<table>
+<tr>
+<td>Employee Name</td>
+<td>Employee Id</td>
+</tr>
+<%
+List<Employee> empList=(ArrayList<Employee>)request.getAttribute("empDetail");
+if(empList!=null){
+for(Employee emp:empList)
+{
+%>
+<tr>
+<td><%=emp.getEmployeeName() %></td>
+<td><%=emp.getEmployeeId() %></td>
+</tr>
+<%}} else {
+%>
+<p>Invalid Input</p>
+<% }%>
+</table>
+</div>
+</form>
+</div>
+</div>
+</body>
+</html>

@@ -24,7 +24,7 @@ background-color:#F2F2F2;
 <div style="padding: 30px"> 
 <div class="container well well-lg" >
 <h2><strong>Register</strong></h2>
-<form action="Submit" method="post">
+<form action="submitInfo" method="post">
 <div class="form-group portal">
   <label for="EmployeeId">Employee Id:</label>
   <input type="text" class="form-control" name="EmployeeId" placeholder="Employee Id" >

@@ -1,0 +1,4 @@
+#Tomcat publish data
+#Wed Dec 06 12:25:50 IST 2017
+org.eclipse.jst.jee.server\:SampleWebApplication=C\:\\Web Servers\\Tomcat\\wtpwebapps\\SampleWebApplication
+org.eclipse.jst.jee.server\:/binary\:E\:\\SampleWebApplication\\SampleWebApplication\\WebContent\\SampleWebApplication.war=C\:\\Web Servers\\Tomcat\\wtpwebapps\\SampleWebApplication\\SampleWebApplication.war

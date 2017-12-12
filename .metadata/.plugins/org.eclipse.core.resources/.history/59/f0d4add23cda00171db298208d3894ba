@@ -1,0 +1,81 @@
+package servlets;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import Helper.ConnectionHelper;
+import Helper.Employee;
+import Models.EmployeeDetailsUtil;
+
+/**
+ * Servlet implementation class EmployeeDetails
+ */
+@WebServlet("/EmployeeDetails")
+public class EmployeeDetails extends HttpServlet {
+	EmployeeDetailsUtil edu= new EmployeeDetailsUtil();
+	C
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public EmployeeDetails() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		try {
+			System.out.println("Inside the Servlet Employee Details");
+			ArrayList<Employee> empDetails=new ArrayList<Employee>();
+			String dropDown= request.getParameter("empDetail");
+			System.out.println(dropDown);
+			if(dropDown.equals("all"))
+			{
+				System.out.println("Inside All Details block");
+				empDetails=edu.getAll();
+				System.out.print(empDetails);
+				request.setAttribute("empDetail", empDetails);
+			}
+			else if(dropDown.equals("byName"))
+			{
+				System.out.println("Inside Name Details block");
+				System.out.println(request.getParameter("SearchBox"));
+				empDetails=edu.getDetailsByName(request.getParameter("SearchBox"));
+				request.setAttribute("empDetail", empDetails);
+			}
+			else if(dropDown.equals("byId"))
+			{
+				System.out.println("Inside Id Details block");
+				System.out.println(request.getParameter("Id"));
+				empDetails=edu.getDetailsById(request.getParameter("SearchBox"));
+				request.setAttribute("empDetail", empDetails);
+			}
+			request.setAttribute("details",empDetails);
+			request.getRequestDispatcher("Details.jsp").forward(request, response); 
+		}
+		catch(Exception e)
+		{
+		e.printStackTrace();
+		}
+	
+	}
+
+}

@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import javax.naming.*;
 import javax.sql.DataSource;
-import java.sql.*;
 
 public class ConnectionHelper {
 	static Connection conn = null;
@@ -21,13 +20,11 @@ public Connection createConnection(){
 		}
 	return conn;	
 }
-public void closeResources(Connection conn,PreparedStatement ps,ResultSet rs)
+public void closeResources(Connection conn)
 {
 	if (conn!=null) 
 		try 
 		{
-			ps.close();
-			rs.close();
 			conn.close();
 		}
 	catch (Exception e) 
